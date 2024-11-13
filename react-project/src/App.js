@@ -9,12 +9,13 @@ import axios from './axiosConfig';  // Axios 설정 유지
 import LoginComponent from './components/Login/LoginComponent';  // 로그인 컴포넌트 추가
 
 const App = () => {
+  // 활성 채널과 DM, 채널 및 DM 리스트 상태 관리
   const [activeChannel, setActiveChannel] = useState('일반');
   const [activeDM, setActiveDM] = useState(null);
   const [channels, setChannels] = useState([]);  // 서버에서 가져올 채널 리스트
   const [dms, setDms] = useState([]);  // 서버에서 가져올 DM 리스트
 
-  // 더미 데이터 설정
+  // 더미 데이터 설정 - 서버와의 연결이 실패했을 때 사용할 임시 데이터
   const dummyChannels = [
     { name: '일반', unread: 2 },
     { name: '개발', unread: 5 },
@@ -29,13 +30,15 @@ const App = () => {
   // 서버에서 채널과 DM 데이터를 가져오는 함수
   const fetchChannelsAndDms = async () => {
     try {
-      const channelsResponse = await axios.get('/channels');  // 서버에서 채널 리스트 가져오기
-      const dmsResponse = await axios.get('/dms');  // 서버에서 DM 리스트 가져오기
+      // 서버에서 채널 리스트 가져오기
+      const channelsResponse = await axios.get('/channels');
+      // 서버에서 DM 리스트 가져오기
+      const dmsResponse = await axios.get('/dms');
       setChannels(channelsResponse.data);  // 가져온 채널 리스트 설정
       setDms(dmsResponse.data);  // 가져온 DM 리스트 설정
     } catch (error) {
+      // 오류 발생 시 콘솔에 출력 후 더미 데이터로 대체
       console.error('서버에서 데이터를 가져오는 중 오류 발생. 더미 데이터를 사용합니다:', error);
-      // 서버에서 데이터를 가져오지 못했을 경우 더미 데이터로 대체
       setChannels(dummyChannels);
       setDms(dummyDms);
     }
@@ -46,6 +49,7 @@ const App = () => {
     fetchChannelsAndDms();
   }, []);
 
+  // 현재 활성화된 채널 또는 DM의 이름을 반환하여 화면에 표시할 제목 설정
   const getTitle = () => {
     if (activeChannel) {
       return activeChannel;
@@ -55,11 +59,13 @@ const App = () => {
     return '채팅';
   };
 
+  // 채널 선택 시 호출되는 핸들러, 활성 채널 설정 및 DM 비활성화
   const handleChannelSelect = (channelName) => {
     setActiveChannel(channelName);
     setActiveDM(null);
   };
 
+  // DM 선택 시 호출되는 핸들러, 활성 DM 설정 및 채널 비활성화
   const handleDMSelect = (dmName) => {
     setActiveDM(dmName);
     setActiveChannel(null);

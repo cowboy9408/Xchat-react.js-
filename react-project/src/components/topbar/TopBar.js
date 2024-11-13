@@ -19,10 +19,11 @@ const darkTheme = {
   shadow: 'rgba(0, 0, 0, 0.3)',
 };
 
-// TopBar 컴포넌트 (동적 채널 및 DM 이름 표시)
+//  (동적 채널 및 DM 이름 표시)
 const TopBar = ({ title }) => {
-  const [theme, setTheme] = useState('light');
-  
+  const [theme, setTheme] = useState('light');  // 초기 테마 상태 설정
+
+  //  다크 모드와 라이트 모드 간의 전환
   const toggleTheme = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark');
   };

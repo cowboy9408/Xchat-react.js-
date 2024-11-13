@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { darkTheme, GlobalStyles } from '../../theme/theme';
-import useAuth from '../../components/Login/hooks/useAuth';
+import useAuth from './hooks/useAuth';
 import Form from './Form';
 import Input from './Input';
 import Button from './Button';

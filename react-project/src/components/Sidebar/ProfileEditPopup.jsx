@@ -14,14 +14,15 @@ import {
 } from './style/ProfileEditPopupStyle';
 import { useUserStatus } from './hooks/useUserStatus';  // 상태 변경 훅 사용
 
+// ProfileEditPopup 컴포넌트: 사용자 프로필 편집을 위한 팝업창 제공
 const ProfileEditPopup = ({ username, userTag, avatarUrl, onClose }) => {
-  const [newUsername, setNewUsername] = useState(username);
-  const [newAvatarUrl, setNewAvatarUrl] = useState(avatarUrl);  // 프로필 사진 관리
-  const { status, handleStatusChange } = useUserStatus();  // 상태 변경 관리
+  const [newUsername, setNewUsername] = useState(username);  // 사용자 이름 상태
+  const [newAvatarUrl, setNewAvatarUrl] = useState(avatarUrl);  // 아바타 URL 상태
+  const { status, handleStatusChange } = useUserStatus();  // 사용자 상태 관리
 
+  // 프로필 저장 함수: 변경 사항을 서버에 전송
   const handleSave = async () => {
     try {
-      // 서버에 프로필 변경 사항 전송
       const formData = new FormData();
       formData.append('username', newUsername);
       formData.append('avatarUrl', newAvatarUrl);  // 파일일 경우 서버에서 처리 필요
@@ -32,7 +33,7 @@ const ProfileEditPopup = ({ username, userTag, avatarUrl, onClose }) => {
       });
       
       console.log('프로필 저장:', newUsername, newAvatarUrl, status);
-      onClose();
+      onClose();  // 저장 후 팝업 닫기
     } catch (error) {
       console.error("프로필 저장 오류:", error);
       alert("프로필 저장 중 문제가 발생했습니다.");
@@ -43,7 +44,7 @@ const ProfileEditPopup = ({ username, userTag, avatarUrl, onClose }) => {
     <PopupContainer>
       <PopupHeader>프로필 편집</PopupHeader>
       <PopupContent>
-        {/* 프로필 사진 변경 */}
+        {/* 프로필 사진 변경 기능 */}
         <AvatarWrapper>
           <AvatarImage src={newAvatarUrl} alt="프로필 사진" />
           <CameraIcon />
@@ -55,7 +56,7 @@ const ProfileEditPopup = ({ username, userTag, avatarUrl, onClose }) => {
           />
         </AvatarWrapper>
         
-        {/* 사용자 이름 변경 */}
+        {/* 사용자 이름 입력란 */}
         <PopupInput
           type="text"
           value={newUsername}
@@ -63,14 +64,14 @@ const ProfileEditPopup = ({ username, userTag, avatarUrl, onClose }) => {
           placeholder="사용자 이름"
         />
 
-        {/* 사용자 태그는 수정할 수 없도록 고정 */}
+        {/* 사용자 태그 표시: 수정 불가 */}
         <PopupInput
           type="text"
           value={`#${userTag}`}
           disabled
         />
 
-        {/* 상태 선택 드롭다운 */}
+        {/* 상태 선택 드롭다운 메뉴 */}
         <DropdownSelect value={status} onChange={(e) => handleStatusChange(e.target.value)}>
           <option value="online">온라인</option>
           <option value="away">자리비움</option>
