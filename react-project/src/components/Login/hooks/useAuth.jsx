@@ -40,19 +40,16 @@ const useAuth = () => {
 
   const handleLogin = async (email, password) => {
     try {
-      const response = await axios.post('/api/auth/login', {
-        email,
-        password,
-      });
-      const { token } = response.data;
-      localStorage.setItem('token', token); // JWT 토큰을 로컬 스토리지에 저장
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      const response = await axios.post('/api/auth/login', { email, password });
+      alert(response.data); // "Login successful"
       navigate('/home'); // 로그인 후 홈으로 이동
     } catch (error) {
       console.error("로그인 오류:", error);
       alert("로그인 정보가 올바르지 않습니다.");
     }
   };
+
+  
 
   return { handleLogin, handleSignup };
 };
