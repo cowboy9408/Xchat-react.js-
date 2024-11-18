@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';  // 서버와 통신하기 위해 추가
+import axiosInstance from '../../../axiosConfig';
 
 export const useNewChannel = (onAddChannel) => {
   const [newChannelName, setNewChannelName] = useState('');  // 새 채널 이름 상태
@@ -10,7 +10,7 @@ export const useNewChannel = (onAddChannel) => {
     if (newChannelName.trim()) {  // 채널 이름이 공백이 아닌지 확인
       try {
         // 서버에 새 채널 생성 요청
-        await axios.post('/api/channels', { name: newChannelName });
+        await axiosInstance.post('/api/channels', { name: newChannelName });
         onAddChannel(newChannelName);  // 상위 컴포넌트에서 제공한 콜백 함수 호출
         setNewChannelName('');  // 입력 필드 초기화
         setIsAddingChannel(false);  // 추가 모드 종료

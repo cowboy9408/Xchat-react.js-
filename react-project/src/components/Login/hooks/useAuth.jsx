@@ -8,25 +8,25 @@ const useAuth = () => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;  // 이메일 형식
   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;  // 최소 8자, 대문자, 소문자, 숫자, 특수문자 포함
 
-  const handleSignup = async (email, password, fullName) => {
-    if (!nameRegex.test(fullName)) {
+  const handleSignup = async (userId, userPwd, userName) => {
+    if (!nameRegex.test(userName)) {
       alert("이름은 최소 2자 이상이어야 하며, 특수문자 없이 입력해주세요.");
       return;
     }
-    if (!emailRegex.test(email)) {
+    if (!emailRegex.test(userId)) {
       alert("유효한 이메일 주소를 입력해주세요.");
       return;
     }
-    if (!passwordRegex.test(password)) {
+    if (!passwordRegex.test(userPwd)) {
       alert("비밀번호는 최소 8자 이상이어야 하며, 대문자, 소문자, 숫자, 특수문자를 포함해야 합니다.");
       return;
     }
 
     try {
       const response = await axiosInstance.post('/auth/signup', {
-        email,
-        password,
-        fullName,
+        userId,
+        userPwd,
+        userName,
       });
       alert(response.data); // "회원가입이 완료되었습니다." 메시지
       navigate('/'); // 회원가입 후 로그인 페이지로 이동
@@ -36,11 +36,11 @@ const useAuth = () => {
     }
   };
 
-  const handleLogin = async (email, password) => {
+  const handleLogin = async (userId, userPwd) => {
     try {
       const response = await axiosInstance.post('/auth/login', {
-        email,
-        password,
+        userId,
+        userPwd,
       });
       alert(response.data.message || "로그인 성공");
       navigate('/home'); // 로그인 후 홈으로 이동
