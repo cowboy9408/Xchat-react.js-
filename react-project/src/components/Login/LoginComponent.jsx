@@ -17,9 +17,9 @@ import {
 
 const LoginComponent = () => {
   const [isSignup, setIsSignup] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [fullName, setFullName] = useState('');
+  const [userId, setEmail] = useState('');
+  const [userPwd, setPassword] = useState('');
+  const [userName, setFullName] = useState('');
   const { handleLogin, handleSignup } = useAuth();  // 서버와 통신할 훅 사용
 
   const toggleForm = () => setIsSignup(!isSignup);
@@ -37,16 +37,16 @@ const LoginComponent = () => {
               <Input
                 type="email"
                 placeholder="이메일"
-                value={email}
+                value={userId}
                 onChange={(e) => setEmail(e.target.value)}
               />
               <Input
                 type="password"
                 placeholder="비밀번호"
-                value={password}
+                value={userPwd}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <Button onClick={() => handleLogin(email, password)}>Log In</Button>
+              <Button onClick={() => handleLogin(userId, userPwd)}>Log In</Button>
             </Form>
           )}
 
@@ -56,22 +56,22 @@ const LoginComponent = () => {
               <Input
                 type="text"
                 placeholder="이름"
-                value={fullName}
+                value={userName}
                 onChange={(e) => setFullName(e.target.value)}
               />
               <Input
                 type="email"
                 placeholder="이메일"
-                value={email}
+                value={userId}
                 onChange={(e) => setEmail(e.target.value)}
               />
               <Input
                 type="password"
                 placeholder="비밀번호"
-                value={password}
+                value={userPwd}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <Button onClick={() => handleSignup(email, password, fullName)}>Sign Up</Button>
+              <Button onClick={() => handleSignup(userId, userPwd, userName)}>Sign Up</Button>
             </Form>
           )}
 
