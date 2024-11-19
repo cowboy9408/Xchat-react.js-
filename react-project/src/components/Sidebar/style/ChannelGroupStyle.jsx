@@ -73,3 +73,31 @@ export const SectionHeader = styled.div`
   margin-bottom: 10px;
   cursor: pointer;
 `;
+
+export const ErrorPopup = styled.div`
+  color: #ff4d4d; /* 에러 메시지 색상 */
+  font-size: 0.85rem;
+  margin-top: 8px;
+  text-align: left;
+  opacity: 1;
+  transition: opacity 0.1s ease-in-out; /* 즉시 표시 */
+`;
+export const Spinner = styled.div`
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite;
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+`;
+
+export const SuccessMessage = styled.div`
+  color: #4caf50;
+  font-size: 0.9rem;
+  margin-top: 8px;
+`;
