@@ -63,3 +63,10 @@ export const SearchInput = styled.input`
     border-color: ${({ theme }) => theme.accent};
   }
 `;
+export const EmptyStateMessage = styled.div`
+  color: #a0a0a0; /* 회색 톤 */
+  font-size: 14px;
+  text-align: center;
+  margin: 20px 0;
+`;
+
