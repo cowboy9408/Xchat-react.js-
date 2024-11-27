@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
-import { Routes, Route, Navigate } from 'react-router-dom';  // Route 관련 추가
+import { Routes, Route, Navigate } from 'react-router-dom';  
 import { darkTheme, GlobalStyles } from './theme/theme';
 import Sidebar from './components/Sidebar/Sidebar';
 import ChatWindow from './components/Chatwindow/ChatWindow';
 import TopBar from './components/topbar/TopBar';
-import axios from './axiosConfig';  // Axios 설정 유지
-import LoginComponent from './components/Login/LoginComponent';  // 로그인 컴포넌트 추가
+import axios from './axiosConfig';  
+import LoginComponent from './components/Login/LoginComponent';  
 
 const App = () => {
   // 활성 채널과 DM, 채널 및 DM 리스트 상태 관리

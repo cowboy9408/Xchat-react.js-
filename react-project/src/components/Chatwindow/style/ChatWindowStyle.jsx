@@ -24,10 +24,10 @@ export const DateDivider = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%; /* 부모 컨테이너의 전체 폭 */
-  margin: 20px 0; /* 위아래 간격 */
-  font-size: 12px; /* 텍스트 크기 */
-  font-weight: 500; /* Slack 유사 텍스트 두께 */
+  width: 100%; 
+  margin: 20px 0; 
+  font-size: 12px; 
+  font-weight: 500;  
   color: #6b7280; /* 중간 회색 */
 
   &::before,
